@@ -1,60 +1,57 @@
-import React, { Fragment } from 'react';
-import { Card, CardBody, Col } from 'reactstrap';
-import { Image } from '../../../AbstractElements';
-import { IMAGE_GALLERY } from '../../../Constant';
-import HeaderCard from '../../Common/Component/HeaderCard';
+import React, { Fragment } from "react";
+import { Card, CardBody, Col } from "reactstrap";
+import { Image } from "../../../AbstractElements";
+import { IMAGE_GALLERY } from "../../../Constant";
+import HeaderCard from "../../Common/Component/HeaderCard";
+import { Gallery, Item } from "react-photoswipe-gallery";
 
-const ListOfImage = ({ smallImages, setPhotoIndex, photoIndex, withDesc }) => {
+const ListOfImage = ({ smallImages }) => {
+  var images = require.context("../../../assets/images", true);
+  const dynamicImage = (image) => {
+    return images(`./${image}`);
+  }
+  let imagesData = [0, 2, 1, 3, 8, 5, 4, 9, 6, 7, 11, 10];
   return (
     <Fragment>
       {smallImages.length > 0 ? (
-        <Col sm='12'>
+        <Col sm="12">
           <Card>
             <HeaderCard title={IMAGE_GALLERY} />
             <CardBody>
-              <div className='my-gallery row'>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[0]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 0, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[2]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 2, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[1]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 1, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[3]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 3, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[8]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 8, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[5]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 5, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[4]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 4, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[9]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 9, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[6]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 6, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[7]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 7, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[11]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 11, isOpen: true }) }} />
-                </figure>
-                <figure className='col-xl-3 col-sm-6'>
-                  <Image attrImage={{ src: require(`../../../assets/images/${smallImages[10]}`), alt: 'Gallery', className: 'img-thumbnail', onClick: () => setPhotoIndex({ ...photoIndex, index: 10, isOpen: true }) }} />
-                </figure>
+              <div className="my-gallery row">
+                <Gallery>
+                  {imagesData.map((item, i) => {
+                    return (
+                      <Item
+                        key={i}
+                        original={`${dynamicImage(smallImages[item])}`}
+                        thumbnail={`${dynamicImage(smallImages[item])}`}
+                        width="700"
+                        height="700"
+                        id={item}
+                      >
+                        {({ ref, open }) => (
+                          <figure className="col-xl-3 col-sm-6">
+                            <img
+                                ref= { ref }
+                                onClick= { open }
+                                src= {require(`../../../assets/images/${smallImages[item]}`)}
+                                alt= "Gallery"
+                                className= "img-thumbnail"
+                            />
+                          </figure>
+                        )}
+                      </Item>
+                    );
+                  })}
+                </Gallery>
+                
               </div>
             </CardBody>
           </Card>
         </Col>
       ) : (
-        ''
+        ""
       )}
     </Fragment>
   );

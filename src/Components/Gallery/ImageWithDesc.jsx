@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useContext, useCallback } from 'react';
 import { Container, Row } from 'reactstrap';
 import { Breadcrumbs } from '../../AbstractElements';
-import SingleImage from './ImageGallery/SingleImage';
+// import SingleImage from './ImageGallery/SingleImage';
 import GalleryContext from '../../_helper/Gallery';
 import ListOfImageDesc from './ImageGallery/ListOfImgDesc';
 
@@ -22,7 +22,7 @@ const ImageWithDesc = () => {
                     <ListOfImageDesc smallImages={smallImages} setPhotoIndex={callback} photoIndex={photoIndex} withDesc={true} />
                 </Row>
             </Container>
-            <SingleImage photoIndex={photoIndex} setPhotoIndex={callback} images={images} />
+            {/* <SingleImage photoIndex={photoIndex} setPhotoIndex={callback} images={images} /> */}
         </Fragment>
     );
 };
