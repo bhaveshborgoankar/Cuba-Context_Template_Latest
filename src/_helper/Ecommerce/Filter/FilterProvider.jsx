@@ -9,6 +9,7 @@ const FilterProvider = (props) => {
     const [searchBy, setSearchBy] = useState('');
     const [colors, setColor] = useState('');
     const [filterContext, setFilterContext] = useState(false);
+    const [sideBarOn, setSideBarOn] = useState(false);
     const [filter, setFilter] = useState({
         brand: brand,
         color: colors,
@@ -61,6 +62,7 @@ const FilterProvider = (props) => {
                 value,
                 filter,
                 filterContext,
+                sideBarOn, setSideBarOn,
                 setFilterContext: setFilterContext,
                 filterCategory: filterCategory,
                 filterBrand: filterBrand,

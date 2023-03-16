@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import  { Fragment } from 'react';
 import { UL, LI } from '../../../../AbstractElements';
 import Sorting from './Sorting';
 import { ChevronDown, Grid, List } from 'react-feather';
@@ -7,11 +7,9 @@ import { useContext } from 'react';
 import FilterContext from '../../../../_helper/Ecommerce/Filter';
 
 const ProductTotal = () => {
-  const { setFilterContext } = useContext(FilterContext);
-  const [filterSidebar, setFilterSidebar] = useState(true);
+  const {  sideBarOn,setSideBarOn } = useContext(FilterContext);
   const onFilterClick = () => {
-    setFilterSidebar(!filterSidebar);
-    setFilterContext(filterSidebar);
+    setSideBarOn(!sideBarOn)
   };
   const gridLayout = () => {
     document.getElementById('product-wrapper-grid').classList.remove('list-view');

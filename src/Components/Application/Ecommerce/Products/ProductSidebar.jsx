@@ -7,17 +7,10 @@ import { Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Row } from 're
 import React, { Fragment, useContext, useState } from 'react';
 
 const ProductSidebar = () => {
-    const { filterContext, filterSearchBy } = useContext(FilterContext);
-    const [sidebaron, setSidebaron] = useState(true);
+    const {  filterSearchBy,sideBarOn, setSideBarOn } = useContext(FilterContext);
     const [searchKeyword, setSearchKeyword] = useState('');
     const onClickFilter = () => {
-        if (sidebaron) {
-            setSidebaron(false);
-            document.getElementById('product-wrapper').classList.add('sidebaron');
-        } else {
-            setSidebaron(true);
-            document.getElementById('product-wrapper').classList.remove('sidebaron');
-        }
+        setSideBarOn(!sideBarOn)
     };
     const handleSearchKeyword = (keyword) => {
         setSearchKeyword(keyword);
@@ -27,7 +20,7 @@ const ProductSidebar = () => {
         <Fragment>
             <Row>
                 <Col xl="3" md="6">
-                    <div className={`product-sidebar ${filterContext ? 'open' : ''}`}>
+                    <div className={`product-sidebar ${sideBarOn ? 'open' : ''}`}>
                         <div className="filter-section">
                             <Card>
                                 <CardHeader>

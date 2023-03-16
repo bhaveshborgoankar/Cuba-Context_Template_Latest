@@ -36,7 +36,7 @@ const LoginTab = ({ selected }) => {
     }
   };
 
-  const loginWithJwt = (e) => {
+  const loginWithJwt = async(e) => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
